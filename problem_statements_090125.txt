@@ -1,0 +1,16 @@
+create a collection named 'persons' using uk-500.csv file.
+
+Execute the following tasks
+1.  Display the documents where the county begins with 'B'
+2. Display the document where the domain email is gmail.com. display only columns 'first_name', 'last_name' and 'email'
+3. Display the document where the first_name contains 'Mag'
+4. Find the count of documents group by county
+5.  find the  doucments where the firt_name is eric and update the last_name to andrew
+
+create a collection named 'phone_data' using phone_data.csv file.
+1.  find the  sum of duration for item value equal to 'call'
+2. find the sum of duration groupby item
+3. find the sum, average of duration group by month
+4. find the maximum and minimum of field 'duration'
+
+
