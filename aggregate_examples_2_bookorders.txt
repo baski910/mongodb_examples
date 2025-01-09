@@ -1,0 +1,46 @@
+db.bookOrders.insertMany ( [
+    { _id: 0, first_name: "Fyodor", last_name: "Dostoyevsky", book_title: 'Demons', genre: 'Fiction', quantity: 10, date: ISODate( "2022-10-21T11:19:30Z" ) },
+    { _id: 1, first_name: "Fyodor", last_name: "Dostoyevsky", book_title: 'Brothers Karamosov', genre: 'Fiction', quantity: 25, date: ISODate( "2022-10-21T11:19:30Z" ) },
+    { _id: 2, first_name: "Jacques", last_name: "Derrida", book_title: 'The Politics of Friendship', genre: 'Fiction', quantity: 5, date: ISODate( "2022-10-21T11:19:30Z" ) },
+    { _id: 3, first_name: "Charles", last_name: "Dickens", book_title: 'Tale of Two Cities', genre: 'Fiction', quantity: 6, date: ISODate( "2022-10-21T11:19:30Z" ) },
+    { _id: 4, first_name: "James", last_name: "Joyce", book_title: 'Ulysses', genre: 'Fiction', quantity: 30, date: ISODate( "2021-03-13T11:19:30Z" ) },
+    { _id: 5, first_name: "Henry David", last_name: "Thoreau", book_title: 'Walden', genre: 'Nonfiction', quantity: 15, date: ISODate( "2021-03-13T11:19:30Z" ) },
+    { _id: 6, first_name: "Virginia", last_name: "Woolf", book_title: "A Room of One's Own", genre: 'Nonfiction',
+     quantity: 18, date: ISODate( "2022-10-21T11:19:30Z" ) },
+    { _id: 7, first_name: "Virginia", last_name: "Woolf", book_title: "Mr's Dalloway", genre: 'Fiction', quantity: 14, date: ISODate( "2022-10-21T11:19:30Z" ) },
+    { _id: 8, first_name: "Zadie", last_name: "Smith", book_title: 'White Teeth', genre: 'Fiction', quantity: 8, date: ISODate( "2022-10-21T11:19:30Z" ) },
+    { _id: 9, first_name: "Charles", last_name: "Dickens", book_title: 'The Old Curiousity Shop', genre: 'Fiction', quantity: 6, date: ISODate( "2022-10-21T11:19:30Z" ) }
+] )
+
+
+db.bookOrder.aggregate([
+// using the match operator
+{
+	$match: {genre: "Fiction"}
+},
+// using the project operator
+{
+$project: {last_name: 1, quantity: 1}
+},
+// using group operator
+{
+$group: {_id: "$last_name",totalQuantity: {$sum: "$quantity"}}  // {$group: {_id:"$genre",totalQuantity: {$sum: "$quantity" }}}
+},
+// using sort operator 
+{
+$sort: { totalQuantity: -1}   
+}
+])
+
+db.bookOrders.aggregate([{$group: {_id: "$genre", totalQuantity:{$sum: "$quantity"},maxQ: {$max: "$quantity"}}}])
+
+db.bookOrders.aggregate([{$group: {_id: "$genre", totalQuantity:{$sum: "$quantity"},avgQ: {$avg: "$quantity"}}}])
+
+
+//db.bookOrders.aggregate([
+//{
+//$group: {_id: "}
+//}
+//])
+
+
