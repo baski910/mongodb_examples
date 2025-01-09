@@ -1,0 +1,32 @@
+db.cities.aggregate([
+    { $match: { "continent": "North America" } }
+]))
+
+db.cities.aggregate([
+    { $match: { "continent": { $in: ["North America", "Asia"] } } }
+]))
+
+db.cities.aggregate([
+    {
+        $group: {
+            "_id": {
+                "continent": "$continent",
+                "country": "$country"
+            }
+        }
+    }
+])
+
+db.cities.aggregate([
+    {
+        $group: {
+            "_id": {
+                "continent": "$continent",
+                "country": "$country"
+            },
+            "highest_population": { $max: "$population" },
+            "first_city": { $first: "$name" },
+            "cities_in_top_20": { $sum: 1 }
+        }
+    }
+])
