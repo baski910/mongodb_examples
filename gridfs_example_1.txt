@@ -1,0 +1,27 @@
+import pymongo
+import gridfs
+client = pymongo.MongoClient('mongodb://localhost:27017/')
+
+db = client.mydb
+
+#Create an object of GridFs for the above database.
+fs = GridFS(db)
+
+#define an image object with the location.
+file = "demo_2.jpg"
+
+#Open the image in read-only format.
+with open(file, 'rb') as f:
+    contents = f.read()
+
+#Now store/put the image via GridFs object.
+a = fs.put(contents, filename="image_from_repo")
+print(a)
+
+file1 = fs.find_one({'filename': "image_from_repo"})
+img = file1.read()
+with(open('new_image1.jpg','wb')) as f:
+    f.write(img)
+fs.delete({'file_id': a})
+print("file deleted")
+
