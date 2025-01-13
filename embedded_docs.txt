@@ -1,0 +1,25 @@
+db.warehouses.insertMany( [
+  {
+    _id: 1,
+    warehouse : "warehouse1",  
+    inventory : [
+      { product: "widgetA", in_stock: 24 },
+      { product: "widgetB", in_stock: 137 },
+      { product: "widgetC", in_stock: 99 } ]
+  },
+  {
+    _id: 2,
+    warehouse : "warehouse2",
+    inventory : [
+      { product: "widgetA", in_stock: 99 },
+      { product: "widgetC", in_stock: 12 },
+      { product: "widgetG", in_stock: 122 } ]
+  },
+  {
+    _id: 3,
+    warehouse : "warehouse3",  
+    inventory : [
+      { product: "widgetC", in_stock: 89 },
+      { product: "widgetD", in_stock: 99 },
+      { product: "widgetF", in_stock: 43 } ]
+  } ] );
